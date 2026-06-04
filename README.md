@@ -9,13 +9,13 @@ Ce projet implémente un jeu de type **MOTUS** (similaire à Wordle) en Python. 
 
 ```
 Projet_Algo_ROSSEL-ROMANO/
-├── README.md                      # Documentation du projet
+├── README.md                     # Documentation du projet
 ├── datas/
 │   └── scrabble.txt              # Dictionnaire des mots valides
 ├── Gaphic/
 │   └── Output.py                 # Utilitaires d'affichage avec couleurs
-├── src/
-│   ├── main.py                   # Point d'entrée principal (à compléter)
+├── Modus/                        # Code du jeu MOTUS
+│   ├── main.py                   # Point d'entrée principal
 │   ├── GameLuncher/
 │   │   └── FileName.py           # Fonction principale (partie) du jeu
 │   ├── Tools/
@@ -24,7 +24,13 @@ Projet_Algo_ROSSEL-ROMANO/
 │   │   ├── Rechercher.py         # Recherche dichotomique
 │   │   └── Trier.py              # Tri fusion pour les mots
 │   └── TxtLoader/                
-│   │   └── DataLoader.py         # Chargement des fichiers texte
+│       └── DataLoader.py         # Chargement des fichiers texte
+└── IA/                           # Intelligence Artificielle pour MOTUS
+    ├── Exercice2/
+    │   └── Fonctions.py          # Implémentation IA naïve
+    └── Exercice3/
+        ├── Fonctions.py          # Implémentation IA avancée avec heuristiques
+        └── Tests.py              # Tests de performance (naïve vs IA)
 ```
 
 ## Modules et Fonctions
@@ -96,6 +102,63 @@ Utilitaires d'affichage:
   - Affiche du texte en fond vert
 
 - Utilise la bibliothèque `colorama` pour les couleurs
+
+## Exercices IA - MOTUS Automatisé
+
+Le projet inclut deux exercices avancés permettant à une IA de jouer automatiquement à MOTUS et de comparer différentes stratégies.
+
+### **IA/Exercice2/ - Approche Naïve**
+
+Implémentation d'une intelligence artificielle basique pour jouer à MOTUS.
+
+Fonctions principales (`Exercice2/Fonctions.py`):
+
+- **`GetPossibleWords(w: str, dico: dict[int, list[str]]) -> list[str]`**
+  - Retourne tous les mots du dictionnaire qui peuvent être obtenus à partir de w
+  - Filtre les mots possibles basé sur les contraintes de longueur
+
+- **`update(words: list[str], w: str, comp: list[int]) -> list[str]`**
+  - Filtre les mots possibles en fonction du résultat de comparaison
+  - Paramètres:
+    - `words`: liste des mots possibles
+    - `w`: proposition faite
+    - `comp`: résultat de la comparaison (2=bien placé, 1=mal placé, 0=absent)
+  - Retourne uniquement les mots cohérents avec la réponse
+
+- **`partieNaive(x: str) -> int`**
+  - Lance une partie automatique où l'IA joue naïvement pour deviner le mot `x`
+  - Stratégie: essaie aléatoirement parmi les mots possibles
+  - Retourne le nombre d'essais effectués
+
+### **IA/Exercice3/ - Approche Intelligente avec Heuristiques**
+
+Implémentation d'une IA optimisée utilisant des heuristiques pour minimiser le nombre d'essais.
+
+Fonctions principales (`Exercice3/Fonctions.py`):
+
+- **`choice(dico: list[str], heuristique: int = 0) -> str`**
+  - Choisit la meilleure proposition parmi les mots possibles
+  - Utilise l'heuristique spécifiée pour évaluer chaque mot
+  - Paramètres:
+    - `dico`: liste des mots possibles
+    - `heuristique`: indice de l'heuristique à utiliser (0, 1, 2, ...)
+  - Retourne le mot sélectionné par l'IA
+
+- **`partieIA(x: str, heuristique: int = 0) -> int`**
+  - Lance une partie automatique avec l'IA intelligente
+  - Utilise l'heuristique choisie pour prendre les décisions
+  - Paramètres:
+    - `x`: mot à deviner
+    - `heuristique`: heuristique à utiliser
+  - Retourne le nombre d'essais effectués
+
+Tests et Comparaison (`Exercice3/Tests.py`):
+
+- Compare les performances entre:
+  - L'approche naïve (Exercice2)
+  - L'approche intelligente (Exercice3) avec différentes heuristiques
+- Mesure le nombre moyen d'essais pour chaque stratégie
+- Permet d'évaluer l'efficacité des heuristiques utilisées
 
 ## Données
 
