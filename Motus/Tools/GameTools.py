@@ -1,6 +1,7 @@
 """
 
 """
+import Rechercher as rech
 
 def isValid(w : str , x : str , dico : dict[int, list[str]]) -> bool:
     """"
@@ -17,7 +18,9 @@ def isValid(w : str , x : str , dico : dict[int, list[str]]) -> bool:
     return:
         True si "w" est une proposition valide et False sinon
     """
-    return
+    if w[0] != x[0] : return False
+    if len(w[0]) != len(x[0]) : return False
+    return rech.inside(w,dico[len(w)])
 
 def compare(w : str , x : str) -> list[int]:
     """
@@ -35,4 +38,10 @@ def compare(w : str , x : str) -> list[int]:
             - 0 sinon
     
     """
+    n = len(w)
+    if n != len(x) : raise ValueError("compare(w,x) :\n   len diff Erreur : w has not same shape as x")
+    res : list[int] = [0] * n
+    for i in range(n):
+        if w[i] == x[i] : res[i] = 1
+        elif w[i] in x : res[i] = 2
     return
