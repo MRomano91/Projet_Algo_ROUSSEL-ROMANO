@@ -2,8 +2,8 @@
 
 """
 
-import Tools.RandomWord as rw
-import TxtLoader.DataLoader as datas
+import Motus.Tools.RandomWord as rw
+import Motus.TxtLoader.DataLoader as datas
 
 def __main__():
     """

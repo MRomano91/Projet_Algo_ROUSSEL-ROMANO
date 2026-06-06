@@ -1,9 +1,9 @@
 """
 Fichier à renommer
 """
-import Modus.Tools.GameTools as tools
-import Modus.TxtLoader.DataLoader as datas
-import Gaphic.Output as out
+import Motus.Tools.GameTools as tools
+import Motus.TxtLoader.DataLoader as datas
+import Graphic.Output as out
 
 def GetPossibleWords(x : str, dico : dict[int, list[str]]) -> list[str]:
     """
