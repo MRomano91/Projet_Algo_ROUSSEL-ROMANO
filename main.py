@@ -2,6 +2,7 @@
 
 """
 
+import Motus.GameLauncher.GameLauncher as gl
 import Motus.Tools.GameTools as gt
 import Motus.Tools.RandomWord as rw
 import Motus.Tools.Rechercher as rech
@@ -172,7 +173,7 @@ def __main__():
 
     print ("=================================")
     print ("||                             ||")
-    print ("||      TEST DU JEU MODUS      ||")
+    print ("||      TEST DU JEU MOTUS      ||")
     print ("||                             ||")
     print ("=================================")
     TestMotus()
@@ -191,6 +192,8 @@ def __main__():
     print ("=================================")
     TestExercice3()
     print("\n\n\n\n")
+
+    gl.partie(6)
 
 
 if __name__ == "__main__":
