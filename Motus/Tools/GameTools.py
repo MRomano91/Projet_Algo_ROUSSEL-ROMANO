@@ -2,6 +2,7 @@
 
 """
 from . import Rechercher as rech
+import copy
 
 def isValid(w : str , x : str , dico : dict[int, list[str]]) -> bool:
     """"
@@ -39,17 +40,20 @@ def compare(w : str , x : str) -> list[int]:
     
     """
     n = len(w)
-    if n != len(x) : raise ValueError(f"compare(w,x) :\n   len diff Erreur : {w} has not same shape as {x}")
+    if n != len(x) : raise ValueError(f"compare2(w,x) :\n   len diff Erreur : {w} has not the same shape as {x}")
+    
     res : list[int] = [0] * n
-    clone : str = x
-    diff : int = 0
-    for i in range(n) :
-        if w[i] == x[i] : 
-            diff += 1
-            clone = clone[:i].join(clone[i+1:])
+    x_list = list(x)
+    
+    for i in range(n):
+        if w[i] == x[i]:
             res[i] = 2
-        elif w[i] in clone : 
+            x_list[i] = None  # Marquer comme utilisée
+    
+    for i in range(n):
+        if res[i] == 0 and w[i] in x_list:
             res[i] = 1
-            clone = clone.replace(w[i], "", 1)
-            diff += 1
+            x_list[x_list.index(w[i])] = None
+    
     return res
+

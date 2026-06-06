@@ -60,6 +60,7 @@ def TestMotus():
     print("Test de inside pour w = aaa et x = aaa : " + ts.Liste1DtoString(gt.compare("aaa","aaa")) ) # Doit renvoyer [2,2,2]
     print("Test de inside pour w = bbb et x = aaa : " + ts.Liste1DtoString(gt.compare("bbb","aaa")) ) # Doit renvoyer [0,0,0]
     print("Test de inside pour w = baa et x = abc : " + ts.Liste1DtoString(gt.compare("baa","abc")) ) # Doit renvoyer [1,1,0]
+    print("Test de inside pour w = baa et x = abc : " + ts.Liste1DtoString(gt.compare("nitrataient","normativite")) ) # Doit renvoyer [2,1,1,1,2,2,0,1,1,0,0]
     print()
     
     # Test de AfficherMotus
