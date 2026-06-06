@@ -1,6 +1,9 @@
 """
 Fichier à renommer
 """
+import Modus.Tools.GameTools as tools
+import Modus.TxtLoader.DataLoader as datas
+import Gaphic.Output as out
 
 def GetPossibleWords(x : str, dico : dict[int, list[str]]) -> list[str]:
     """
@@ -13,19 +16,23 @@ def GetPossibleWords(x : str, dico : dict[int, list[str]]) -> list[str]:
     return :
         l'ensemble des mots de dico qui peuvent être obtenus à partir de x 
     """
-    return
+    return dico[len(x)]
 
 def update(words : list[str], w : str, comp : list[int]) -> list[str]: 
     """
     Renvoie la liste des mots x parmi ceux de la liste words tels que compare(w,x) = comp.
     param :
-        words : une liste de mots
-        w : une chaîne de caractères
-        comp : un tableau d'entiers de taille len(w)
+        words : une liste de mots 
+        w : meilleur mot
+        comp : un tableau d'entiers de taille len(x) qui décrit le match entre x et le dernier mot testé
     return :
         une liste de mots
     """
-    return 
+    res : list[str] = []
+    for x in words :
+        if tools.compare(w,x) == comp :
+            res.append(x)
+    return res
 
 def partieNaive(x : str) -> int:
     """
@@ -35,4 +42,18 @@ def partieNaive(x : str) -> int:
     return :
         le nombre de tentatives effectuées
     """
-    return 
+    robert : dict[int, list[str]] = datas.loadDico("datas/scrabble.txt")
+    current_best_word : str = robert[len(x)][0]
+    comp = tools.compare(current_best_word,x) 
+    matching_words : list[str] = []
+    tours_de_jeu : int = 0
+    
+    while (len(matching_words) != 1) :
+
+        comp = tools.compare(current_best_word,x)
+        matching_words = update(matching_words,current_best_word,comp)
+        current_best_word = matching_words[0]
+        out.AfficherMotus(current_best_word,comp)
+        tours_de_jeu += 1
+    
+    return tours_de_jeu
