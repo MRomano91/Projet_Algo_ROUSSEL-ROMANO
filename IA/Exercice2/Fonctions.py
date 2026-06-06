@@ -1,16 +1,20 @@
 """
 Fichier à renommer
 """
+import Modus.Tools.GameTools as tools
 
-def GetPossibleWords(w : str, dico : dict[int, list[str]]) -> list[str]:
+def GetPossibleWords(x : str, dico : dict[int, list[str]]) -> list[str]:
     """
+    Accede a la liste des propositions valides parmi un dictionnaire dico etant donne un mot x a deviner
+    Complexite :
+        - Temps : O(1)
     param :
-        w : une chaîne de caractères
+        x : mot à deviner
         dico : un ensemble de mots
     return :
-        l'ensemble des mots de dico qui peuvent être obtenus à partir de w 
+        l'ensemble des mots de dico qui peuvent être obtenus à partir de x 
     """
-    return
+    return dico[len(x)]
 
 def update(words : list[str], w : str, comp : list[int]) -> list[str]: 
     """
@@ -22,7 +26,11 @@ def update(words : list[str], w : str, comp : list[int]) -> list[str]:
     return :
         une liste de mots
     """
-    return
+    res : list[str] = []
+    for x in words :
+        if tools.compare(w,x) == comp :
+            res.append(x)
+    return res
 
 def partieNaive(x : str) -> int:
     """
@@ -32,4 +40,9 @@ def partieNaive(x : str) -> int:
     return :
         le nombre de tentatives effectuées
     """
-    return
+    matching_words : list[str] = []
+    tours_de_jeu : int = 0
+    while (len(matching_words) != 1) :
+        
+        tours_de_jeu += 1
+    return 
