@@ -46,7 +46,7 @@ def partieNaive(x : str) -> int:
     """
     robert : dict[int, list[str]] = datas.loadDico("datas/scrabble.txt")
     matching_words : list[str] = robert[len(x)]
-    current_best_word : str = matching_words[0]
+    current_best_word : str = rd.randomWord(matching_words)
     comp = gt.compare(current_best_word,x) 
     tours_de_jeu : int = 1
     
