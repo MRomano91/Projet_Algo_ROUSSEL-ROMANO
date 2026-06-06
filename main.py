@@ -7,6 +7,7 @@ import Motus.Tools.RandomWord as rw
 import Motus.Tools.Rechercher as rech
 import Motus.Tools.Tools as ts
 import Motus.TxtLoader.DataLoader as datas
+import Graphic.Output as out
 
 def __main__():
     """
@@ -14,12 +15,12 @@ def __main__():
     """
 
     # Test de chargement du dictionnaire 
-    
     print("Chargement du dico")
     dico = datas.loadDico('datas/scrabble.txt')
 
     print("Le nouveau mot de longueur 5 est : " + rw.randomWordFromDico(dico=dico, l=5))
     print("Le nouveau mot de longueur 7 est : " + rw.randomWordFromDico(dico=dico, l=7))
+
 
     # Test de inside
     print("Test de inside: ", + rech.inside("aaaa", dico[4])) # Doit renvoyer 0
@@ -46,6 +47,12 @@ def __main__():
     print("Test de inside pour w = baa et x = abc : " + ts.Liste1DtoString(gt.compare("baa","abc")) ) # Doit renvoyer [1,1,0]
     
     # return
+
+
+    # Test de AfficherMotus
+    mot = "abcdef"
+    comparaison_test = [2, 1, 1, 0, 2, 0] 
+    out.AfficherMotus(mot, comparaison_test)
 
 if __name__ == "__main__":
     __main__()
