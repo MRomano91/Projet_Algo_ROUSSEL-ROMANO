@@ -1,9 +1,11 @@
 """
 Fichier à renommer
 """
-import Motus.Tools.GameTools as tools
+import Motus.Tools.GameTools as gt
+import Motus.Tools.RandomWord as rd
 import Motus.TxtLoader.DataLoader as datas
 import Graphic.Output as out
+
 
 def GetPossibleWords(x : str, dico : dict[int, list[str]]) -> list[str]:
     """
@@ -30,7 +32,7 @@ def update(words : list[str], w : str, comp : list[int]) -> list[str]:
     """
     res : list[str] = []
     for x in words :
-        if tools.compare(w,x) == comp :
+        if gt.compare(w,x) == comp :
             res.append(x)
     return res
 
@@ -43,17 +45,19 @@ def partieNaive(x : str) -> int:
         le nombre de tentatives effectuées
     """
     robert : dict[int, list[str]] = datas.loadDico("datas/scrabble.txt")
-    current_best_word : str = robert[len(x)][0]
-    comp = tools.compare(current_best_word,x) 
-    matching_words : list[str] = []
-    tours_de_jeu : int = 0
+    matching_words : list[str] = robert[len(x)]
+    current_best_word : str = matching_words[0]
+    comp = gt.compare(current_best_word,x) 
+    tours_de_jeu : int = 1
     
-    while (len(matching_words) != 1) :
+    while ((len(matching_words) != 1) or (current_best_word != x)):
 
-        comp = tools.compare(current_best_word,x)
-        matching_words = update(matching_words,current_best_word,comp)
-        current_best_word = matching_words[0]
         out.AfficherMotus(current_best_word,comp)
+        matching_words = update(matching_words,current_best_word,comp)
+        current_best_word = rd.randomWord(matching_words)
+        comp = gt.compare(current_best_word,x)
         tours_de_jeu += 1
     
+    comp = gt.compare(current_best_word,x)
+    out.AfficherMotus(current_best_word,comp)
     return tours_de_jeu
