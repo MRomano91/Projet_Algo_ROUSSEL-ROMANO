@@ -23,6 +23,7 @@ def loadDico(path : str) -> dict[int, list[str]]:
             if l not in dico.keys():
                 dico[l] = [word.strip()]
 
+            # Sinon, on le rajoute directement au tableau existant
             else:
                 dico[l].append(word.strip())
 
