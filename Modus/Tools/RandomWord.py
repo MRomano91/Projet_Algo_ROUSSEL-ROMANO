@@ -1,6 +1,4 @@
-"""
-
-"""
+import random
 
 def randomWord(dico : list[str]) -> str:
     """
@@ -10,12 +8,13 @@ def randomWord(dico : list[str]) -> str:
         - Espace : O(1)
     param :
         dico: la liste de mots
-    return: 
+    return:
         un mot aléatoire de la liste
     """
-    return
 
-def randomWord(dico : dict[int, list[str]] , l : int) -> str:
+    return dico[random.randint(0, len(dico) - 1)]
+
+def randomWordFromDico(dico : dict[int, list[str]], l : int) -> str:
     """
     Renvoie un mot aléatoire d'une liste de taille "l" de mots contenue dans un dictionnaire.
     Complexite :
@@ -24,7 +23,7 @@ def randomWord(dico : dict[int, list[str]] , l : int) -> str:
     param :
         dico: dictionnaire de listes de mots
         l: la longueur du mot à renvoyer
-    return: 
+    return:
         un mot aléatoire de la liste
     """
-    return
+    return dico[l][random.randint(0, len(dico[l]) - 1)]
