@@ -2,8 +2,10 @@
 
 """
 
+import Motus.Tools.GameTools as gt
 import Motus.Tools.RandomWord as rw
 import Motus.Tools.Rechercher as rech
+import Motus.Tools.Tools as ts
 import Motus.TxtLoader.DataLoader as datas
 
 def __main__():
@@ -26,6 +28,23 @@ def __main__():
     print("Test de inside: ", + rech.inside("pris", dico[4])) # Doit renvoyer 1
     print("Test de inside: ", + rech.inside("gkmx", dico[4])) # Doit renvoyer 0
 
+    # Test de isValid
+    print("Test de inside pour w = bas et x = les : ", + gt.isValid("bas","les",dico) ) # Doit renvoyer 0
+    print("Test de inside pour w = bas et x = b : ", + gt.isValid("bas","b",dico) ) # Doit renvoyer 0
+    print("Test de inside pour w = bbb et x = bas : ", + gt.isValid("bbb","bas",dico) ) # Doit renvoyer 0
+    print("Test de inside pour w = bas et x = bas : ", + gt.isValid("bas","bas",dico) ) # Doit renvoyer 1
+    
+    # Test de compare
+    try : 
+        print("Test de inside pour w = aaa  et x = aaaa:")
+        gt.compare("aaa","aaaa")
+    except Exception as e :
+        print(e) # Doit afficher une ValueError
+    
+    print("Test de inside pour w = aaa et x = aaa : " + ts.Liste1DtoString(gt.compare("aaa","aaa")) ) # Doit renvoyer [2,2,2]
+    print("Test de inside pour w = bbb et x = aaa : " + ts.Liste1DtoString(gt.compare("bbb","aaa")) ) # Doit renvoyer [0,0,0]
+    print("Test de inside pour w = baa et x = abc : " + ts.Liste1DtoString(gt.compare("baa","abc")) ) # Doit renvoyer [1,1,0]
+    
     # return
 
 if __name__ == "__main__":
