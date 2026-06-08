@@ -50,7 +50,7 @@ def partieNaive(x : str) -> int:
     comp = gt.compare(current_best_word,x) 
     tours_de_jeu : int = 1
     
-    while ((len(matching_words) != 1) or (current_best_word != x)):
+    while current_best_word != x:
 
         out.AfficherMotus(current_best_word,comp)
         matching_words = update(matching_words,current_best_word,comp)

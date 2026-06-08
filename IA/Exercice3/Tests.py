@@ -34,9 +34,8 @@ def test_performance_comparison(num_tests: int = 3):
     param :
         - num_tests : nombre de mots à tester
     """
-    print("=" * 70)
     print("CHARGEMENT DU DICTIONNAIRE...")
-    print("=" * 70)
+    print("----------------------------------------------")
     
     dico = datas.loadDico("datas/scrabble.txt")
     
@@ -45,17 +44,11 @@ def test_performance_comparison(num_tests: int = 3):
     print()
     
     # Sélectionner les mots à tester
-    print("=" * 70)
     print(f"SÉLECTION DE {num_tests} MOTS ALÉATOIRES À TESTER...")
-    print("=" * 70)
+    print("----------------------------------------------")
     
     test_words = []
-    # Prioriser les longueurs courtes (4-7 lettres) pour éviter timeout
-    preferred_lengths = [4, 5, 6, 7]
-    available_lengths = [l for l in preferred_lengths if l in dico]
-    
-    if not available_lengths:
-        available_lengths = list(dico.keys())
+    available_lengths = list(dico.keys())
     
     for _ in range(num_tests):
         length = random.choice(available_lengths)
@@ -65,10 +58,8 @@ def test_performance_comparison(num_tests: int = 3):
     print(f"Mots sélectionnés : {test_words}")
     print()
     
-    # Tester les trois approches
-    print("=" * 70)
-    print("EXÉCUTION DES TESTS...")
-    print("=" * 70)
+    print("EXÉCUTION DES TESTS")
+    print("----------------------------------------------")
     print()
     
     results_naive = []
@@ -82,7 +73,7 @@ def test_performance_comparison(num_tests: int = 3):
     for i, word in enumerate(test_words, 1):
         print(f"Test {i}/{num_tests} : mot = '{word}'")
         
-        # Naïve (random)
+        # Naïve
         start = time.time()
         attempts_naive = e2.partieNaive(word)
         time_naive = time.time() - start
@@ -107,10 +98,8 @@ def test_performance_comparison(num_tests: int = 3):
         print(f"  Heuristique 1       : {attempts_h1} tentatives ({time_h1:.3f}s)")
         print()
     
-    # Afficher les résultats
-    print("=" * 70)
     print("RÉSULTATS FINAUX")
-    print("=" * 70)
+    print("----------------------------------------------")
     print()
     
     
@@ -118,10 +107,8 @@ def test_performance_comparison(num_tests: int = 3):
     print_stats_results("Heuristique 0", results_h0, times_h0)
     print_stats_results("Heuristique 1", results_h1, times_h1)
     
-    # Comparaison
-    print("=" * 70)
     print("COMPARAISON ET AMÉLIORATIONS")
-    print("=" * 70)
+    print("----------------------------------------------")
     print()
     
     avg_naive = mean(results_naive)

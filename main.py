@@ -165,7 +165,6 @@ def TestExercice2():
     print()
 
 def TestExercice3():
-    tex3.test_performance_comparison(num_tests=10)
     print()
 
 
@@ -182,6 +181,7 @@ def __main__():
     print ("=================================")
     TestMotus()
     print("\n\n\n\n")
+
     print ("=================================")
     print ("||                             ||")
     print ("||        TEST IA NAIVE        ||")
@@ -189,6 +189,7 @@ def __main__():
     print ("=================================")
     TestExercice2()
     print("\n\n\n\n")
+
     print ("=================================")
     print ("||                             ||")
     print ("||           TEST IA           ||")
@@ -197,6 +198,14 @@ def __main__():
     TestExercice3()
     print("\n\n\n\n")
 
+    print ("=================================")
+    print ("||                             ||")
+    print ("||    TEST PERFORMANCES IAs    ||")
+    print ("||                             ||")
+    print ("=================================")
+    tex3.test_performance_comparison(num_tests=10)
+    print("\n\n\n\n")
+    
     gl.partie(6)
 
 
