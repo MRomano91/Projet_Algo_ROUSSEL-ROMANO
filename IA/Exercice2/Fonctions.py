@@ -45,7 +45,7 @@ def partieNaive(x : str) -> int:
         le nombre de tentatives effectuées
     """
     robert : dict[int, list[str]] = datas.loadDico("datas/scrabble.txt")
-    matching_words : list[str] = robert[len(x)]
+    matching_words : list[str] = GetPossibleWords(x, robert)
     current_best_word : str = rd.randomWord(matching_words)
     comp = gt.compare(current_best_word,x) 
     tours_de_jeu : int = 1
