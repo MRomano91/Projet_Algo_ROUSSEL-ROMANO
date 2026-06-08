@@ -10,6 +10,8 @@ import Motus.Tools.Tools as ts
 import Motus.TxtLoader.DataLoader as datas
 import Graphic.Output as out
 import IA.Exercice2.Fonctions as ex2
+import IA.Exercice3.Fonctions as ex3
+import IA.Exercice3.Tests as tex3
 
 def TestMotus():
     """
@@ -163,7 +165,8 @@ def TestExercice2():
     print()
 
 def TestExercice3():
-    pass
+    tex3.test_performance_comparison(num_tests=10)
+    print()
 
 
 
