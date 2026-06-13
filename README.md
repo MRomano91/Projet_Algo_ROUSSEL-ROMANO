@@ -51,7 +51,7 @@ Contient les fonctions principales de la logique du jeu:
 - **`isValid(w: str, x: str, dico: dict[int, list[str]]) -> bool`**
   - Vérifie si une proposition est valide
   - Critères: bonne longueur, première lettre correcte, mot dans le dictionnaire
-  - Complexité: O(log n_l)
+  - Complexité: $O(\log{n})$, correspondant à la complexité de la fonction `inside()`, effectuant une recherche dichotomique sur le tableau de taille $n$, contenant les mots de même longeur que w.
 
 - **`compare(w: str, x: str) -> list[int]`**
   - Compare deux mots et retourne un tableau de codes:
@@ -61,19 +61,19 @@ Contient les fonctions principales de la logique du jeu:
   - Gère correctement les doublons avec un algorithme 2-passes:
     - Pass 1: Marquer les lettres bien placées (2)
     - Pass 2: Marquer les lettres mal placées (1) parmi les restantes
-  - Complexité: O(m), m = longueur du mot
+  - Complexité: $O(m)$, avec $m$ la longueur du mot.
 
 ### 2. **Motus/Tools/RandomWord.py**
 Sélection aléatoire de mots:
 
 - **`randomWord(dico: list[str]) -> str`**
   - Retourne un mot aléatoire d'une liste
-  - Complexité: O(1) temps et espace
+  - Complexité: $O(1)$ en temps et espace
 
 - **`randomWordFromDico(dico: dict[int, list[str]], l: int) -> str`**
   - Retourne un mot aléatoire d'une longueur spécifique
   - Utilise le dictionnaire organisé par longueur
-  - Complexité: O(1) temps et espace
+  - Complexité: $O(1)$ en temps et espace
 
 ### 3. **Motus/Tools/Rechercher.py**
 Algorithme de recherche:
@@ -82,23 +82,23 @@ Algorithme de recherche:
   - Recherche dichotomique d'un mot dans une liste triée
   - Vérifie si un mot existe dans le dictionnaire
   - Utilise la récursion avec division en deux
-  - Complexité: O(log(|lst|))
+  - Complexité: $O(log(|lst|))$, correspondant à la complexité d'une recherche dichotomique classique.
 
 ### 4. **Motus/Tools/Trier.py**
 Algorithme de tri:
 
 - **`Split(l: list) -> tuple[list, list]`**
   - Divise une liste en deux parties quasi-égales
-  - Complexité: O(n)
+  - Complexité: $O(n)$ car la scission implique l'allocation des éléments de la liste, de manière successive, dans deux tableaux à part entière.
 
 - **`FusionListeString(l1: list[str], l2: list[str]) -> list[str]`**
   - Fusionne deux listes triées de chaînes
-  - Complexité: O(|l1| + |l2|)
+  - Complexité: $O(|l1| + |l2|)$, soit $O(n)$ avec n le nombre total d'éléments dans l1 et l2 combinés.
 
 - **`TrieFusionListeString(l: list[str]) -> list[str]`**
   - Trie une liste de chaînes de caractères par ordre alphabétique
   - Utilise l'algorithme du tri fusion
-  - Complexité: O(n log n)
+  - Complexité: $O(n \log{n})$, correspondant à la complexité du tri fusion.
 
 ### 5. **Motus/Tools/Tools.py**
 Fonctions utilitaires:
@@ -130,7 +130,7 @@ Chargement du dictionnaire:
 - **`loadDico(path: str) -> dict[int, list[str]]`**
   - Charge tous les mots du fichier en dictionnaire
   - Structure: clés = longueurs (4, 5, 6...), valeurs = listes de mots
-  - Complexité: O(n) où n = nombre total de mots
+  - Complexité: $O(n)$ où $n$ est le nombre total de mots
 
 ### 8. **Graphic/Output.py**
 Utilitaires d'affichage:
@@ -157,7 +157,7 @@ Fonctions principales (`Exercice2/Fonctions.py`):
 - **`GetPossibleWords(x: str, dico: dict[int, list[str]]) -> list[str]`**
   - Retourne tous les mots du dictionnaire de la même longueur que x
   - Retourne `dico[len(x)]` directement
-  - Complexité: O(1)
+  - Complexité: $O(1)$
 
 - **`update(words: list[str], w: str, comp: list[int]) -> list[str]`**
   - Filtre les mots possibles en fonction du résultat de comparaison
@@ -167,7 +167,8 @@ Fonctions principales (`Exercice2/Fonctions.py`):
     - `comp`: résultat de la comparaison (2=bien placé, 1=mal placé, 0=absent)
   - Retourne uniquement les mots cohérents avec la réponse
   - Utilise `compare(w, x) == comp` pour chaque mot x
-  - Complexité: O(|words| × len(w))
+  - Complexité: $O(|words| × len(w))$
+  **Tu en es là bg**
 
 - **`partieNaive(x: str) -> int`**
   - Lance une partie automatique où l'IA joue naïvement pour deviner le mot `x`
@@ -179,7 +180,7 @@ Fonctions principales (`Exercice2/Fonctions.py`):
     5. Filtre les mots compatibles avec le résultat
     6. Répète jusqu'à trouver le mot
   - Retourne le nombre d'essais effectués
-  - Complexité moyenne: O(log n) essais, chaque essai coûte O(|words| × len(x))
+  - Complexité moyenne : $O(\log n)$ essais, chaque essai coûte $O(|words| × len(x))$
 
 ### **IA/Exercice3/ - Approche Intelligente avec Heuristiques**
 

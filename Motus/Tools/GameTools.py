@@ -11,7 +11,7 @@ def isValid(w : str , x : str , dico : dict[int, list[str]]) -> bool:
         - La bonne premiere lettre ?
         - S'il existe dans le dictionnaire ?
     Complexite :
-        - Temps : O(log n_l).
+        - Temps : O(log (n)), avec n le nombre de mots de la longueur de x
     param :
         w: le mot à vérifier
         x: le mot à deviner
