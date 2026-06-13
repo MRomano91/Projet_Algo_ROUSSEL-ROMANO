@@ -1,13 +1,110 @@
 # Projet Algo - MOTUS
 Projet bonus d'Algo APP3 : Implémentation du jeu MOTUS
 
+Polytech Paris-Saclay | APP3 IIM | Année universitaire 2025-2026
+
+## Auteurs
+
+- ROMANO Matheo
+- ROUSSEL Marc
+
+
 ## Description
 
 Ce projet implémente un jeu de type **MOTUS** (similaire à Wordle) en Python. Le joueur dispose d'un nombre limité d'essais pour deviner un mot secret choisi aléatoirement par le jeu. Pour chaque proposition, le programme indique si les lettres sont bien placées, mal placées ou absentes du mot secret.
 
 ## Installation & Démarrage
 
-**// A FAIRE**
+
+```bash
+# Cloner le repository
+git clone https://github.com/MRomano91/Projet_Algo_ROUSSEL-ROMANO.git
+cd Projet_Algo_ROUSSEL-ROMANO
+
+# Créer un environnement virtuel python
+python3 -m venv .env
+
+# Activer cet environnement python
+.env\Scripts\activate # Pour Windows
+source .env/bin/activate # Pour UNIX (Linux, macOS)
+
+# Installer les dépendances
+pip install -r requirements.txt
+```
+
+## Utilisation
+
+### Mode Interactif
+
+#### Lancer directement une partie
+```bash
+python main.py   
+```
+
+#### Lancer les tests unitaires Motus, puis une partie
+```bash
+python main.py -t
+```
+
+#### Lancer les tests IA (Exercice 2 & 3), puis une partie
+```bash
+python main.py -ia
+```
+
+#### Lance tous les tests, puis une partie
+```bash
+python main.py -t -ia
+```
+
+Le programme:
+1. Lance une partie avec 6 essais
+2. Choisit un mot aléatoire de 4 à 14 lettres
+3. Affiche la longueur et la première lettre
+4. Le joueur propose des mots
+5. Les lettres bien placées s'affichent en **ROUGE**
+6. Les lettres mal placées s'affichent en **VERT**
+
+#### Exemple de Déroulement
+
+```
+*****************
+*  MO-MO-MOTUS  *
+*****************
+M--------- | 10 lettres
+Il vous reste 6 tentatives
+----------------------------
+Veuillez saisir un mot :
+MATHEMAT
+[MATHEMAT colorisé selon résultat]
+M [ROUGE - lettre bien placée]
+A [VERT - lettre mal placée]
+T [BLANC - lettre absente]
+...
+```
+
+### Mode IA Naïve (Exercice 2)
+```python
+python3 # Lancer d'abord un interpréteur Python
+>>> from IA.Exercice2.Fonctions import partieNaive
+>>> partieNaive('motus')
+5  # Nombre d'essais pour trouver 'motus'
+```
+
+### Mode IA Intelligente (Exercice 3) - $\sigma_0$
+```python
+python3
+>>> from IA.Exercice3.Fonctions import partieIA
+>>> partieIA('motus', 0)
+3  # Nombre d'essais (généralement plus bas que l'IA naïve)
+```
+
+### Mode IA Intelligente (Exercice 3) - $\sigma_1$
+```python
+python3
+>>> from IA.Exercice3.Fonctions import partieIA
+>>> partieIA('motus', 1)
+3  # Nombre d'essais 
+```
 
 ## Architecture du Projet
 
@@ -65,10 +162,10 @@ Contient les fonctions principales de la logique du jeu:
     - `2`: lettre bien placée
     - `1`: lettre mal placée
     - `0`: lettre absente
-  - Gère correctement les doublons avec un algorithme 2-passes:
-    - Pass 1: Marquer les lettres bien placées (2)
-    - Pass 2: Marquer les lettres mal placées (1) parmi les restantes
-  - Complexité: $O(m)$, avec $m$ la longueur des mots `w` et `x`, tous deux supposés être de même longueur.
+  - Gère correctement les doublons avec un algorithme 2-passes. On parcourt le mot deux fois pour les objectifs suivants :
+    - 1er parcourt : Marquer les lettres bien placées (2)
+    - 2ème parcourt : Marquer les lettres mal placées (1) parmi les restantes
+  - Complexité: $O(2m) = O(m)$, avec $m$ la longueur des mots `w` et `x`, tous deux supposés être de même longueur.
 
 ### 2. **Motus/Tools/RandomWord.py**
 Sélection aléatoire de mots:
@@ -269,86 +366,6 @@ Fichier contenant tous les mots valides du jeu. Le programme:
 - **colorama** : Pour les affichages en couleur
 
 
-## Installation
-
-```bash
-# Cloner le repository
-git clone https://github.com/MRomano91/Projet_Algo_ROUSSEL-ROMANO.git
-cd Projet_Algo_ROUSSEL-ROMANO
-
-# Installer les dépendances
-pip install -r requirements.txt
-```
-
-## Utilisation
-
-### Mode Interactif (Joueur vs Ordi)
-```bash
-python main.py
-```
-Lance les tests TestMotus(), TestExercice2(), TestExercice3() puis une partie classique.
-
-Ou directement en Python:
-```bash
-python -c "from Motus.GameLauncher.GameLauncher import partie; partie(6)"
-```
-Le programme:
-1. Lance une partie avec 6 essais
-2. Choisit un mot aléatoire de 4 à 14 lettres
-3. Affiche la longueur et la première lettre
-4. Le joueur propose des mots
-5. Les lettres bien placées s'affichent en **ROUGE**
-6. Les lettres mal placées s'affichent en **VERT**
-
-### Mode Automatisé - IA Naïve (Exercice 2)
-```bash
-echo "A compléter
-```
-Ou directement en Python:
-```bash
-python -c "from IA.Exercice2.Fonctions import partieNaive;print(f"Nombre d'essais: {partieNaive('motus')}")";
-```
-
-### Mode Automatisé - IA Intelligente (Exercice 3)
-```bash
-echo "A compléter
-```
-
-## Exemple de Déroulement
-
-### Mode Interactif
-```
-*****************
-*  MO-MO-MOTUS  *
-*****************
-M--------- | 10 lettres
-Il vous reste 6 tentatives
-----------------------------
-Veuillez saisir un mot :
-MATHEMAT
-[MATHEMAT colorisé selon résultat]
-M [ROUGE - bien placé]
-A [VERT - mal placé]
-T [BLANC - absent]
-...
-```
-
-### Mode IA Naïve (Exercice 2)
-```python
->>> from IA.Exercice2.Fonctions import partieNaive
->>> partieNaive('motus')
-[Affichage de chaque proposition avec ses couleurs]
-5  # Nombre d'essais pour trouver 'motus'
-```
-
-### Mode IA Intelligente (Exercice 3) - $\sigma_0$
-```python
->>> from IA.Exercice3.Fonctions import partieIA
->>> partieIA('motus', 0)
-[Affichage avec choix intelligents basés sur $\sigma_0$]
-3  # Nombre d'essais (généralement plus bas que l'IA naïve)
-```
-
 ## Complexité Globale
 
 | Opération | Complexité | Notes |
@@ -489,10 +506,7 @@ compare('test', 'best') = [0, 2, 2, 2]
    - [ ] Parallélisation avec threading
    - [ ] Tri des listes pour binary search
 
-## Auteurs
 
-- ROUSSEL Marque
-- ROMANO Matheo
 
 ## Historique des Versions
 
