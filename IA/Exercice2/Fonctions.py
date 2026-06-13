@@ -1,5 +1,5 @@
 """
-Fichier à renommer
+Fonctions associées à l'approche naïve de l'exercice 2
 """
 import Motus.Tools.GameTools as gt
 import Motus.Tools.RandomWord as rd

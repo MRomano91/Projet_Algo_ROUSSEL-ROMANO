@@ -1,5 +1,5 @@
 """
-Comparaison des performances entre l'implémentation naïve et l'IA
+Test de l'IA + Comparaison des performances entre l'implémentation naïve et l'IA
 """
 import IA.Exercice2.Fonctions as e2
 import IA.Exercice3.Fonctions as e3

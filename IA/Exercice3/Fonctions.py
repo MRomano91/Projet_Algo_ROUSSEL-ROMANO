@@ -1,12 +1,11 @@
 """
-Fichier à renommer + refaire l'arboraissance
+Fonctions associées à l'IA de l'exercice 3
 """
 
 from math import log
 from sys import float_info as fi
 import IA.Exercice2.Fonctions as e2
 import Motus.Tools.GameTools as gt
-import Motus.Tools.RandomWord as rd
 import Motus.TxtLoader.DataLoader as datas
 import Graphic.Output as out
 
@@ -25,7 +24,7 @@ def FilterByFirstChar(words : list[str], char : str) -> list[str]:
 def choice(dico: list[str], heuristique: int = 0) -> str:
     """
     Choisit la meilleure proposition de l'IA en fonction de l'heuristique choisie
-    Optimisé avec arret si partition parfaite trouvée
+    Optimisé avec arrêt si partition parfaite trouvée
 
     param :
         - dico : liste de mots possibles
@@ -69,8 +68,8 @@ def choice(dico: list[str], heuristique: int = 0) -> str:
 
 def partieIA(x: str, heuristique: int = 0) -> int:
     """
-    IA  joue à MOTUS avec une des heuristiques proposées lorsque le mot à deviner est x,
-    et renvoie le nombre de tentatives effectuées
+    L'IA joue à MOTUS avec une des heuristiques proposées lorsque le mot à deviner est x,
+    et renvoie le nombre de tentatives effectuées.
     
     param :
         - x : mot à deviner
