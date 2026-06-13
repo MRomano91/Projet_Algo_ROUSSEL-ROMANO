@@ -38,22 +38,22 @@ pip install -r requirements.txt
 
 #### Lancer directement une partie
 ```bash
-python main.py   
+python romano_roussel.py   
 ```
 
 #### Lancer les tests unitaires Motus, puis une partie
 ```bash
-python main.py -t
+python romano_roussel.py -t
 ```
 
 #### Lancer les tests IA (Exercice 2 & 3), puis une partie
 ```bash
-python main.py -ia
+python romano_roussel.py -ia
 ```
 
 #### Lance tous les tests, puis une partie
 ```bash
-python main.py -t -ia
+python romano_roussel.py -t -ia
 ```
 
 Le programme:
