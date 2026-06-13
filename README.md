@@ -365,7 +365,6 @@ Fichier contenant tous les mots valides du jeu. Le programme:
 - **Python 3.7+** (type hints requis)
 - **colorama** : Pour les affichages en couleur
 
-
 ## Complexité Globale
 
 | Opération | Complexité | Notes |
@@ -378,30 +377,6 @@ Fichier contenant tous les mots valides du jeu. Le programme:
 | Choice (IA Intelligente) | O(\|words\|² × m) | Calcule $\sigma$ pour tous les mots |
 | Partie (IA Naïve) | O(log n × \|words\| × m) | Environ log n essais |
 | Partie (IA Intelligente) | O(log n × \|words\|² × m) | Plus d'essais mais meilleure stratégie |
-
-## Notes de Développement
-
-### État Actuel du Projet
-- Structure du projet définie et correcte
-- Signatures des fonctions avec documentations complètes
-- Dictionnaire Scrabble intégré
-- Dépendance colorama ajoutée
-- Implémentation GameTools.py avec compare() correcte (2-passes)
-- Implémentation Exercice2 (IA Naïve) complète
-- Exercice3 (IA Intelligente) - Signatures définies, implémentation en cours
-- Tests - TestMotus, TestExercice2 fonctionnels, TestExercice3 à compléter
-
-### Problèmes Résolus
-1. Import error: Package Rechercher → Correction de la structure
-2. Bug compare() - Out-of-range → Algorithme 2-passes implémenté
-3. Structure des dossiers → Correction de Gaphic → Graphic
-4. FileName.py → GameLauncher.py
-
-### À Faire - Exercice 3
-- [ ] Implémenter `choice()` avec calcul de $\sigma_0$ et $\sigma_1$
-- [ ] Implémenter `partieIA()` utilisant `choice()`
-- [ ] Ajouter TestExercice3() à main.py
-- [ ] Comparer statistiquement Naïve vs $\sigma_0$ vs $\sigma_1$
 
 ## Flux de Jeu Détaillé
 
@@ -456,76 +431,3 @@ compare('test', 'best') = [0, 2, 2, 2]
 # 0 = absent, 1 = mal placé, 2 = bien placé
 ```
 
-### Analyse de Complexité
-- **loadDico()**: O(n) - lecture linéaire
-- **inside()**: O(log m) - recherche dichotomique
-- **compare()**: O(len(w)) - 2 passes sur le mot
-- **update()**: O(|words| × len(w)) - filtre tous les mots
-- **partieNaive()**: O(log n × |words| × len(w)) en moyenne
-- **choice()**: O(|words|² × len(w)) - calcule $\sigma$ pour tous les mots
-- **partieIA()**: O(log n × |words|² × len(w)) - moins d'essais mais plus cher par essai
-
-## Optimisations et Points Clés
-
-### 1. **Structure par longueur**
-- Accès O(1) aux mots de longueur donnée
-- Pas de filtrage par longueur à chaque étape
-
-### 2. **Algorithm compare() - Deux passes**
-- Pass 1: Marquer bien-placés (2), les supprimer
-- Pass 2: Marquer mal-placés (1) parmi les restants
-- Gère correctement les doublons
-
-### 3. **Performance des IA**
-- Naïve: ~5-7 essais en moyenne
-- $\sigma_0$: ~3-4 essais (optimale moyenne)
-- $\sigma_1$: ~4-5 essais (pire cas garanti)
-
-## Améliorations Futures
-
-1. **Exercice 3 - Implémentation complète**
-   - [ ] Implémenter $\sigma_0$ et $\sigma_1$
-   - [ ] Optimiser choice() avec caching
-   - [ ] Ajouter autres heuristiques
-
-2. **Interface Graphique**
-   - [ ] Utiliser Tkinter pour GUI
-   - [ ] Affichage temps réel de l'IA
-
-3. **Multilangues**
-   - [ ] Support plusieurs dictionnaires
-   - [ ] Interface bilingue
-
-4. **Persistance**
-   - [ ] Sauvegarder scores
-   - [ ] Leaderboard
-   - [ ] Statistiques par longueur
-
-5. **Optimisations**
-   - [ ] Memoization des compare()
-   - [ ] Parallélisation avec threading
-   - [ ] Tri des listes pour binary search
-
-
-
-## Historique des Versions
-
-### V1.0.0 (Squelette)
-- Structure du projet définie
-- Signatures des fonctions avec documentations complètes
-- Dictionnaire Scrabble intégré
-- Dépendance colorama ajoutée
-
-### V1.1.0 (Implémentation)
-- GameTools.py: Toutes les fonctions implémentées
-- Exercice2: IA Naïve complète et testée
-- Exercice3: Signatures et concepts documentés
-- Tests: TestMotus et TestExercice2 fonctionnels
-- [ ] Exercice3: Implémentation en cours
-- [ ] Comparaison statistique: À venir
-
-### V1.2.0 (Prévue)
-- [ ] Exercice3: IA Intelligente complète
-- [ ] Tests complets de performance
-- [ ] Optimisations algorithmiques
-- [ ] Interface graphique
