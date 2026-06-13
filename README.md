@@ -5,6 +5,10 @@ Projet bonus d'Algo APP3 : Implémentation du jeu MOTUS
 
 Ce projet implémente un jeu de type **MOTUS** (similaire à Wordle) en Python. Le joueur dispose d'un nombre limité d'essais pour deviner un mot secret choisi aléatoirement par le jeu. Pour chaque proposition, le programme indique si les lettres sont bien placées, mal placées ou absentes du mot secret.
 
+## Installation & Démarrage
+
+**// A FAIRE**
+
 ## Architecture du Projet
 
 ```
@@ -37,6 +41,7 @@ Projet_Algo_ROUSSEL-ROMANO/
     ├── Exercice2/
     │   ├── __init__.py
     │   └── Fonctions.py          # Implémentation IA naïve
+    │   └── Tests.py              # Tests des fonctions de l'IA naïve
     └── Exercice3/
         ├── __init__.py
         ├── Fonctions.py          # Implémentation IA avancée avec heuristiques
@@ -44,6 +49,8 @@ Projet_Algo_ROUSSEL-ROMANO/
 ```
 
 ## Modules et Fonctions
+
+Cette section présente les fonctions par module et fichiers, indiqués dans l'arborescence ci-dessus, et détaille leur fonctionnement, leurs paramètres, ainsi que leurs complexités. 
 
 ### 1. **Motus/Tools/GameTools.py**
 Contient les fonctions principales de la logique du jeu:
@@ -61,7 +68,7 @@ Contient les fonctions principales de la logique du jeu:
   - Gère correctement les doublons avec un algorithme 2-passes:
     - Pass 1: Marquer les lettres bien placées (2)
     - Pass 2: Marquer les lettres mal placées (1) parmi les restantes
-  - Complexité: $O(m)$, avec $m$ la longueur du mot.
+  - Complexité: $O(m)$, avec $m$ la longueur des mots `w` et `x`, tous deux supposés être de même longueur.
 
 ### 2. **Motus/Tools/RandomWord.py**
 Sélection aléatoire de mots:
@@ -88,12 +95,12 @@ Algorithme de recherche:
 Algorithme de tri:
 
 - **`Split(l: list) -> tuple[list, list]`**
-  - Divise une liste en deux parties quasi-égales
+  - Scinde une liste en autres listes de longueur quasi-égales
   - Complexité: $O(n)$ car la scission implique l'allocation des éléments de la liste, de manière successive, dans deux tableaux à part entière.
 
 - **`FusionListeString(l1: list[str], l2: list[str]) -> list[str]`**
   - Fusionne deux listes triées de chaînes
-  - Complexité: $O(|l1| + |l2|)$, soit $O(n)$ avec n le nombre total d'éléments dans l1 et l2 combinés.
+  - Complexité: $O(|l1| + |l2|)$, soit $O(n)$ avec $n$ le nombre total d'éléments dans $l1$ et $l2$ combinés.
 
 - **`TrieFusionListeString(l: list[str]) -> list[str]`**
   - Trie une liste de chaînes de caractères par ordre alphabétique
@@ -105,12 +112,16 @@ Fonctions utilitaires:
 
 - **`Liste1DtoString(l: list) -> str`**
   - Convertit une liste 1D en chaîne de caractères formatée
+  - Parcourt chaque élément de la liste `l`
+  - Complexité: $O(n)$ avec $n$ le nombre d'éléments de la liste `l`
 
 - **`Tableau2DtoString(t: list[list]) -> str`**
   - Convertit une liste 2D en chaîne de caractères formatée
+  - Parcourt chaque sous-liste `l` de la liste `t`, et fait appel à `Liste1DtoString(l)` pour formatter chaque sous-liste
+  - Complexité: $O(m \times n)$ avec $m$ le nombre d'éléments de `t`, multipliée par $O(n)$, la complexité de `Liste1DtoString()`
 
 ### 6. **Motus/GameLauncher/GameLauncher.py**
-Lance et gère une partie complète:
+Lance et gère une partie complète :
 
 - **`partie(n: int) -> None`**
   - Lance une partie interactive avec n essais maximum
@@ -148,7 +159,7 @@ Utilitaires d'affichage:
 
 Le projet inclut deux exercices avancés permettant à une IA de jouer automatiquement à MOTUS et de comparer différentes stratégies.
 
-### **IA/Exercice2/ - Approche Naïve**
+### **IA - Exercice 2 - Approche Naïve**
 
 Implémentation d'une intelligence artificielle basique pour jouer à MOTUS.
 
@@ -157,7 +168,8 @@ Fonctions principales (`Exercice2/Fonctions.py`):
 - **`GetPossibleWords(x: str, dico: dict[int, list[str]]) -> list[str]`**
   - Retourne tous les mots du dictionnaire de la même longueur que x
   - Retourne `dico[len(x)]` directement
-  - Complexité: $O(1)$
+  - Complexité: $O(1)$, correspondant à l'accès direct en mémoire
+
 
 - **`update(words: list[str], w: str, comp: list[int]) -> list[str]`**
   - Filtre les mots possibles en fonction du résultat de comparaison
@@ -166,13 +178,15 @@ Fonctions principales (`Exercice2/Fonctions.py`):
     - `w`: proposition de l'IA
     - `comp`: résultat de la comparaison (2=bien placé, 1=mal placé, 0=absent)
   - Retourne uniquement les mots cohérents avec la réponse
-  - Utilise `compare(w, x) == comp` pour chaque mot x
-  - Complexité: $O(|words| × len(w))$
-  **Tu en es là bg**
+  - Utilise `compare(w, x) == comp` pour chaque mot `x` de `words`
+  - Complexité: $O(|words| × len(x))$ avec $|words|$ le nombre de mots dans $words$, 
+  multiplé par $O(len(x))$, correspondant à la complexité de `compare(w, x)`, avec 
+  $len(x)$ le nombre de lettres dans le mot $x$.
+
 
 - **`partieNaive(x: str) -> int`**
   - Lance une partie automatique où l'IA joue naïvement pour deviner le mot `x`
-  - Stratégie:
+  - Suit la stratégie suivante :
     1. Charge le dictionnaire Scrabble
     2. Récupère tous les mots de même longueur que x
     3. Choisit aléatoirement parmi les mots possibles
@@ -180,9 +194,12 @@ Fonctions principales (`Exercice2/Fonctions.py`):
     5. Filtre les mots compatibles avec le résultat
     6. Répète jusqu'à trouver le mot
   - Retourne le nombre d'essais effectués
-  - Complexité moyenne : $O(\log n)$ essais, chaque essai coûte $O(|words| × len(x))$
+  - Complexité moyenne : $O(\log n)$ avec $n$ le nombre d'essais, où chaque essai coûte $O(|words| × len(x))$, correspondant à la complexité de `update(matching_words, current_best_word, comp)`, avec :
+    - `matching_words` les mots compatibles, 
+    - `current_best_word` le meilleur mot trouvé,
+    - `comp` la comparaison entre le meilleur mot et un mot compatible
 
-### **IA/Exercice3/ - Approche Intelligente avec Heuristiques**
+### **IA - Exercice 3 - Approche Intelligente avec Heuristiques**
 
 Implémentation d'une IA optimisée utilisant des heuristiques pour minimiser le nombre d'essais.
 
@@ -190,13 +207,13 @@ Implémentation d'une IA optimisée utilisant des heuristiques pour minimiser le
 
 L'IA utilise la théorie de l'information pour choisir les meilleures propositions. Pour chaque mot candidat w et chaque ensemble S de mots possibles:
 
-- **σ₀(w,S) - Stratégie moyenne (Average Information Gain)**:
+- **$\sigma_0$(w,S) - Stratégie moyenne (Average Information Gain)**:
   $$\sigma_0(w,S) = \frac{1}{|S|} \sum_{x \in S} \log\left(\frac{|S|}{|S[w,x]|}\right)$$
   - Maximise le gain moyen d'information
   - S[w,x] = ensemble des mots y tels que compare(w,y) = compare(w,x)
   - Stratégie équilibrée pour réduire en moyenne la taille de S
 
-- **σ₁(w,S) - Stratégie pessimiste (Worst-case Information Gain)**:
+- **$\sigma_1$(w,S) - Stratégie pessimiste (Worst-case Information Gain)**:
   $$\sigma_1(w,S) = \min_{x \in S} \log\left(\frac{|S|}{|S[w,x]|}\right)$$
   - Maximise le pire cas (worst-case)
   - Garantit une réduction même dans le pire scenario
@@ -204,23 +221,30 @@ L'IA utilise la théorie de l'information pour choisir les meilleures propositio
 
 Fonctions principales (`Exercice3/Fonctions.py`):
 
+- **`FilterByFirstChar(words: list[str], char: str) -> list[str]`**
+  - Filtre les mots commençant par un caractère donné
+  - Complexité: $O(|words|)$, avec $|words|$ le nombre de mots dans `words`, correspondant au parcours de la liste (l'accès `w[0]` étant en $O(1)$)
+
+
 - **`choice(dico: list[str], heuristique: int = 0) -> str`**
   - Choisit la meilleure proposition parmi les mots possibles
-  - Utilise l'heuristique spécifiée pour évaluer chaque mot
+  - Utilise l'heuristique spécifiée en paramètres pour évaluer chaque mot
   - Paramètres:
     - `dico`: liste des mots possibles à évaluer
-    - `heuristique`: indice de l'heuristique (0=σ₀, 1=σ₁)
+    - `heuristique`: indice de l'heuristique (0=$\sigma_0$, 1=$\sigma_1$)
+  - Calcule, pour chaque mot `w` de `dico`, la partition `Si` en comparant `w` à chaque mot `x` de `dico` via `gt.compare(w, x)`, soit $O(len(x))$ par comparaison
   - Retourne le mot avec le score heuristique le plus élevé
-  - **À implémenter**
+  - Complexité: $O(|dico|^2 × len(x))$ dans le pire cas, avec $|dico|$ le nombre de mots dans `dico` et $len(x)$ le nombre de lettres dans le mot à deviner. Ici, $|dico|^2$ correspond à la double boucle sur `dico` (chacune de taille $|dico|$), multipliée par le coût de `gt.compare(w, x)`. Le calcul du score (`sum` ou `max` sur `Si.values()`) est en $O(|dico|)$, dominé par le terme précédent.
+
 
 - **`partieIA(x: str, heuristique: int = 0) -> int`**
   - Lance une partie automatique avec l'IA intelligente
   - Utilise l'heuristique choisie pour prendre les décisions
   - Paramètres:
     - `x`: mot à deviner
-    - `heuristique`: heuristique à utiliser (0=σ₀, 1=σ₁)
+    - `heuristique`: heuristique à utiliser (0=$\sigma_0$, 1=$\sigma_1$)
   - Retourne le nombre d'essais effectués
-  - **À implémenter**
+  - Complexité moyenne : $O(\log n)$ avec $n$ le nombre d'essais, où chaque essai coûte $O(|matching\_words|^2 × len(x))$, correspondant à l'appel de `choice(matching_words, heuristique)`, ce coût dominant celui de `update` (issu de l'exercice 2, en $O(|matching\_words| × len(x))$)
 
 Tests et Comparaison (`Exercice3/Tests.py`):
 
@@ -229,7 +253,6 @@ Tests et Comparaison (`Exercice3/Tests.py`):
   - L'approche intelligente (Exercice3) avec différentes heuristiques
 - Mesure le nombre moyen d'essais pour chaque stratégie
 - Permet d'évaluer l'efficacité des heuristiques utilisées
-- **À implémenter**
 
 ## Données
 
@@ -318,11 +341,11 @@ T [BLANC - absent]
 5  # Nombre d'essais pour trouver 'motus'
 ```
 
-### Mode IA Intelligente (Exercice 3) - σ₀
+### Mode IA Intelligente (Exercice 3) - $\sigma_0$
 ```python
 >>> from IA.Exercice3.Fonctions import partieIA
 >>> partieIA('motus', 0)
-[Affichage avec choix intelligents basés sur σ₀]
+[Affichage avec choix intelligents basés sur $\sigma_0$]
 3  # Nombre d'essais (généralement plus bas que l'IA naïve)
 ```
 
@@ -335,7 +358,7 @@ T [BLANC - absent]
 | Comparaison de mots | O(m) | m = longueur du mot, 2 passes |
 | Sélection aléatoire | O(1) | Accès direct à un élément |
 | Update (IA Naïve) | O(\|words\| × m) | Filtre tous les mots |
-| Choice (IA Intelligente) | O(\|words\|² × m) | Calcule σ pour tous les mots |
+| Choice (IA Intelligente) | O(\|words\|² × m) | Calcule $\sigma$ pour tous les mots |
 | Partie (IA Naïve) | O(log n × \|words\| × m) | Environ log n essais |
 | Partie (IA Intelligente) | O(log n × \|words\|² × m) | Plus d'essais mais meilleure stratégie |
 
@@ -358,10 +381,10 @@ T [BLANC - absent]
 4. FileName.py → GameLauncher.py
 
 ### À Faire - Exercice 3
-- [ ] Implémenter `choice()` avec calcul de σ₀ et σ₁
+- [ ] Implémenter `choice()` avec calcul de $\sigma_0$ et $\sigma_1$
 - [ ] Implémenter `partieIA()` utilisant `choice()`
 - [ ] Ajouter TestExercice3() à main.py
-- [ ] Comparer statistiquement Naïve vs σ₀ vs σ₁
+- [ ] Comparer statistiquement Naïve vs $\sigma_0$ vs $\sigma_1$
 
 ## Flux de Jeu Détaillé
 
@@ -382,19 +405,19 @@ T [BLANC - absent]
 1. Charger dictionnaire
 2. S = mots de longueur len(x)
 3. w = random(S)
-4. Boucle (tant que w ≠ x):
+4. Boucle (tant que w $\neq$ x) :
    - Afficher w
-   - Filtrer S = update(S, w, compare(w,x))
+   - Filtrer S = `update(S, w, compare(w,x))`
    - w = random(S)
    - Incrémenter compteur
 5. Retourner compteur
 
 ### Mode IA Intelligente
 1. Initialisation comme IA Naïve
-2. Boucle (tant que w ≠ x):
+2. Boucle (tant que w $\neq$ x) :
    - Afficher w
    - Filtrer S
-   - **w = choice(S, heuristique)** (Choix intelligent!)
+   - **`w = choice(S, heuristique)`** (*Choix intelligent*)
    - Incrémenter compteur
 3. Retourner compteur
 
@@ -422,7 +445,7 @@ compare('test', 'best') = [0, 2, 2, 2]
 - **compare()**: O(len(w)) - 2 passes sur le mot
 - **update()**: O(|words| × len(w)) - filtre tous les mots
 - **partieNaive()**: O(log n × |words| × len(w)) en moyenne
-- **choice()**: O(|words|² × len(w)) - calcule σ pour tous les mots
+- **choice()**: O(|words|² × len(w)) - calcule $\sigma$ pour tous les mots
 - **partieIA()**: O(log n × |words|² × len(w)) - moins d'essais mais plus cher par essai
 
 ## Optimisations et Points Clés
@@ -438,13 +461,13 @@ compare('test', 'best') = [0, 2, 2, 2]
 
 ### 3. **Performance des IA**
 - Naïve: ~5-7 essais en moyenne
-- σ₀: ~3-4 essais (optimale moyenne)
-- σ₁: ~4-5 essais (pire cas garanti)
+- $\sigma_0$: ~3-4 essais (optimale moyenne)
+- $\sigma_1$: ~4-5 essais (pire cas garanti)
 
 ## Améliorations Futures
 
 1. **Exercice 3 - Implémentation complète**
-   - [ ] Implémenter σ₀ et σ₁
+   - [ ] Implémenter $\sigma_0$ et $\sigma_1$
    - [ ] Optimiser choice() avec caching
    - [ ] Ajouter autres heuristiques
 

@@ -1,6 +1,5 @@
 """
-Devrait - on  le mettre dans Tools ? main ?
-Fonction d'affichage pour le projet
+Fonctions d'affichage pour le jeu MOTUS
 """
 
 import colorama
@@ -33,15 +32,15 @@ def AfficherMotus(w: str, comparaison: list[int]):
 
     for i in range(len(w)):
 
-        # Pour les lettres incorrectes
+        # Pour les lettres incorrectes
         if comparaison[i] == 0:
             printDefault(w[i])
 
-        # Pour les lettres présentes
+        # Pour les lettres présentes
         if comparaison[i] == 1:
             printGreen(w[i])
 
-        # Pour les lettres correctes
+        # Pour les lettres correctes
         if comparaison[i] == 2:
             printRed(w[i])
     print()
