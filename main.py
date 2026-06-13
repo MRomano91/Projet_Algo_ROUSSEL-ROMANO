@@ -2,6 +2,7 @@
 
 """
 
+import argparse
 import Motus.GameLauncher.GameLauncher as gl
 import Motus.Tools.GameTools as gt
 import Motus.Tools.RandomWord as rw
@@ -73,49 +74,48 @@ def TestMotus():
     out.AfficherMotus(mot, comparaison_test)
     print()
 
-
-def TestExercice2():
-    """
-    Tests pour les fonctions de l'IA naïve (Exercice 2)
-    """
-
-
-def TestExercice3():
-    print()
-
-
-
 def __main__():
     """
     Point d'entrée du programme
     """
 
-    print ("=================================")
-    print ("||                             ||")
-    print ("||    TESTS UNITAIRES MOTUS    ||")
-    print ("||                             ||")
-    print ("=================================")
-    TestMotus()
-    print("\n\n\n\n")
+    # Prise en compte des arguments
+    parser = argparse.ArgumentParser(description="MOTUS - Jeu de devinettes")
+    parser.add_argument("-t", action="store_true", help="Lancer les tests unitaires Motus avant de jouer")
+    parser.add_argument("-ia", action="store_true", help="Lancer les tests IA (Exercice 2 & 3) avant de jouer")
+    args = parser.parse_args()
 
-    print ("=================================")
-    print ("||                             ||")
-    print ("||        TEST IA NAIVE        ||")
-    print ("||                             ||")
-    print ("=================================")
-    tex2.test_naive()
-    print("\n\n\n\n")
+    # Si les tests unitaires sont lancés
+    if args.t:
+        print ("=================================")
+        print ("||                             ||")
+        print ("||    TESTS UNITAIRES MOTUS    ||")
+        print ("||                             ||")
+        print ("=================================")
+        TestMotus()
+        print("\n\n\n\n")
 
-    print ("=================================")
-    print ("||                             ||")
-    print ("||           TEST IA           ||")
-    print ("||              +              ||")
-    print ("||    COMPARAISON NAVIE & IA   ||")
-    print ("||                             ||")
-    print ("=================================")
-    tex3.test_performance_comparison(num_tests=10)
-    print("\n\n\n\n")
-    
+    # Si les tests d'IA sont lancés
+    if args.ia:
+        print ("=================================")
+        print ("||                             ||")
+        print ("||        TEST IA NAIVE        ||")
+        print ("||                             ||")
+        print ("=================================")
+        tex2.test_naive()
+        print("\n\n\n\n")
+
+        print ("=================================")
+        print ("||                             ||")
+        print ("||           TEST IA           ||")
+        print ("||              +              ||")
+        print ("||    COMPARAISON NAIVE & IA   ||")
+        print ("||                             ||")
+        print ("=================================")
+        tex3.test_performance_comparison(num_tests=10)
+        print("\n\n\n\n")
+
+    # Lancement d'un jeu avec
     gl.partie(6)
 
 
