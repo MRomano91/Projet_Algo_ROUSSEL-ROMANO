@@ -13,14 +13,22 @@ Polytech Paris-Saclay | APP3 IIM | Année universitaire 2025-2026
 
 Ce projet implémente un jeu de type **MOTUS** (similaire à Wordle) en Python. Le joueur dispose d'un nombre limité d'essais pour deviner un mot secret choisi aléatoirement par le jeu. Pour chaque proposition, le programme indique si les lettres sont bien placées, mal placées ou absentes du mot secret.
 
-## Installation & Démarrage
+## Installation
 
-
+### Depuis l'archive zip
 ```bash
-# Cloner le repository
+unzip romano_roussel.zip
+cd Projet_Algo_ROUSSEL-ROMANO
+```
+ou
+### Depuis le repository GitHub
+```bash
 git clone https://github.com/MRomano91/Projet_Algo_ROUSSEL-ROMANO.git
 cd Projet_Algo_ROUSSEL-ROMANO
 
+```
+puis
+```bash
 # Créer un environnement virtuel python
 python3 -m venv .env
 
